@@ -3,6 +3,7 @@ pipeline {
     stages{
         stage('Build'){
             steps {
+                echo 'Executing Maven Clean Package'
                 sh 'mvn clean package'
             }
             post {
@@ -15,6 +16,22 @@ pipeline {
         stage('Deploy to Dev'){
             steps {
                 build job: 'deploy-to-dev'
+            }
+        }
+        stage('Deploy to QA'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message:'Approve QA Deployment?'
+                }
+                build job: 'deploy-to-qa'
+            }
+            post {
+                success {
+                    echo 'Code successfully deployed to QA.'
+                }
+                failure {
+                    echo 'Deployment failed.'
+                }
             }
         }
     }
