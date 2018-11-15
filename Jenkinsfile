@@ -13,7 +13,7 @@ pipeline {
             }
         stage('Deploy to Tomcat 01'){
             steps {
-                build job: 'deploy-to-tomcat-01'
+                build job: 'deploy-to-dev'
             }
         }
     }
