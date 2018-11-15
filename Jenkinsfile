@@ -11,6 +11,7 @@ pipeline {
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
+        }
         stage('Deploy to Tomcat 01'){
             steps {
                 build job: 'deploy-to-dev'
