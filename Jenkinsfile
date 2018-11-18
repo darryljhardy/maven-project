@@ -17,12 +17,17 @@ pipeline {
             steps {
                 build job: 'deploy-to-dev'
             }
+            post {
+                success {
+                    echo 'Code successfully deployed to Dev.'
+                }
+                failure {
+                    echo 'Oh oh. Deployment to Dev failed!'
+                }
+            }
         }
         stage('Deploy to QA'){
-            steps{
-                timeout(time:5, unit:'DAYS'){
-                    input message:'Approve QA Deployment?'
-                }
+            steps {
                 build job: 'deploy-to-qa'
             }
             post {
@@ -30,7 +35,39 @@ pipeline {
                     echo 'Code successfully deployed to QA.'
                 }
                 failure {
-                    echo 'Oh oh. Deployment failed!'
+                    echo 'Oh oh. Deployment to QA failed!'
+                }
+            }
+        }
+        stage('Deploy to PT'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message:'Approve PT Deployment?'
+                }
+                build job: 'deploy-to-pt'
+            }
+            post {
+                success {
+                    echo 'Code successfully deployed to PT.'
+                }
+                failure {
+                    echo 'Oh oh. Deployment to PT failed!'
+                }
+            }
+        }
+        stage('Deploy to Prod'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message:'Approve Production Deployment?'
+                }
+                build job: 'deploy-to-prod'
+            }
+            post {
+                success {
+                    echo 'Code successfully deployed to Production.'
+                }
+                failure {
+                    echo 'Oh oh. Deployment to Production failed!'
                 }
             }
         }
