@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo "Executing Maven Clean Package"
                 sh "mvn clean package"
-                bat "${MY_BAT_DOCKER} . -t tomcatwebapp:${env.BUILD_ID}"
+                //bat "${MY_BAT_DOCKER} . -t tomcatwebapp:${env.BUILD_ID}"
                 sh "${MY_SH_DOCKER} . -t tomcatwebapp:${env.BUILD_ID}"
                 //sh "export"
             }
