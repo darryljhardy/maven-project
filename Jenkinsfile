@@ -30,7 +30,7 @@ pipeline {
                     echo 'Code successfully deployed to QA.'
                 }
                 failure {
-                    echo 'Deployment failed.'
+                    echo 'Oh oh. Deployment failed!'
                 }
             }
         }
