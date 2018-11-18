@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo "Executing Maven Clean Package"
                 sh "mvn clean package"
-                sh "C:\Program Files\Docker Toolbox\docker build . -t tomcatwebapp:${env.BUILD_ID}"
+                sh "/c/Program Files/Docker Toolbox/docker build . -t tomcatwebapp:${env.BUILD_ID}"
             }
             post {
                 success {
